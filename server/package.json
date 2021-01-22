@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "prestart": "npm run build",
-    "start": "tsc-watch --onSuccess \"node .\""
+    "dev": "tsc-watch --onSuccess \"node .\"",
+    "start": "node ."
   },
   "dependencies": {
     "axios": "^0.21.1",
