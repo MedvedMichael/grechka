@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-import { Product } from '../interfaces/Product'
-import { Store } from '../interfaces/Store'
+import { Product } from '../../interfaces/Product'
+import { Store } from '../../interfaces/Store'
 import querystring from 'querystring';
 const apiBase = 'https://stores-api.zakaz.ua'
 
