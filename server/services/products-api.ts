@@ -12,8 +12,14 @@ export const getAllStores = async () =>
             'Accept-Language': 'en',
             'Content-Type': 'application/json'
         }
-    }).then(res => res.data).then(data => 
-        data.map(({id, name, address}: Store) => ({id, name, address}))
+    }).then(res => res.data).then((data: any[]) => 
+        data.map(({id, name, address}: Store) => ({id, name: name.split(' ')[0], address} as Store))
+        .reduce((prev, curr) => {
+            if(!prev.find(item => item.name === curr.name)) 
+                prev.push(curr)
+
+            return prev
+        },[] as Store[])
     ).catch(error => console.log(error)) as Store[]
 
 export const getSearchedProductsFromStore = async (storeID: number, search: string) => {
@@ -25,7 +31,7 @@ export const getSearchedProductsFromStore = async (storeID: number, search: stri
                 title: product.title, 
                 url: product.web_url, 
                 imgURL: product.img?.s350x350, 
-                price: product.weight ? product.price / product.weight * 1000 / 100 : product.price / 100,
-                unit: 'грн/кг'
-            })).sort((a,b) => a.price - b.price)) as Product[]
+                price: product.price,
+                weight: product.weight
+            }))) as Product[]
 }

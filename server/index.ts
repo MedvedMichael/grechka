@@ -12,8 +12,26 @@ app.get('/', (req, res) => {
 app.get('/grechka', async (req, res) => {
   try {
     const stores = (await getAllStores()).filter(store => store.address.city === 'Kyiv')
-    const grechkaProducts = await Promise.all(stores.map(async store => ({store, products: await getSearchedProductsFromStore(store.id, 'гречана крупа')})))
+    const grechkaProducts = await Promise.all(stores.map(async store => ({
+      store, 
+      products:  (await getSearchedProductsFromStore(store.id, 'гречана крупа'))
+        .map(product => ({ 
+          ...product, 
+          price: product.weight ? product.price / product.weight * 10 : product.price / 100 
+        }))
+        .sort((a,b) => a.price - b.price)
+    })))
     res.status(200).send(grechkaProducts)
+  }
+  catch (error) {
+    res.status(500).send(error)
+  }
+})
+
+app.get('/stores', async (req, res) => {
+  try {
+    const stores = (await getAllStores()).filter(store => store.address.city === 'Kyiv')
+    res.status(200).send(stores)
   }
   catch (error) {
     res.status(500).send(error)
@@ -31,16 +49,7 @@ app.get('/:name', async (req, res) => {
   }
 })
 
-// app.get('/stores', async (req, res) => {
-//   try {
-//     const stores = (await getAllStores()).filter(store => store.address.city === 'Kyiv')
-//     console.log(stores)
-//     res.status(200).send(stores)
-//   }
-//   catch (error) {
-//     res.status(500).send(error)
-//   }
-// })
+
 
 app.listen(port, async () => {
   console.log('Web server is on port ' + port);

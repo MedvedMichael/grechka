@@ -3,5 +3,6 @@ export interface Product {
     price: number,
     imgURL: string,
     url: string,
-    unit: string
+    unit?: string,
+    weight: number
 }
