@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:lts-alpine
 
 # создание директории приложения
 WORKDIR /usr/src/app
@@ -15,11 +15,13 @@ WORKDIR /usr/src/app
 # копируем исходный код
 COPY . .
 
-RUN npm install --prefix ./client
+RUN npm install -g typescript
 
 RUN npm install --prefix ./server
+RUN npm install --prefix ./client
+
 
 
 EXPOSE 3000 3001
 # CMD [ "npm", "run --prefix ./server start" ]
-CMD [ "npm", "start" ]
+CMD [ "./start.sh" ]
