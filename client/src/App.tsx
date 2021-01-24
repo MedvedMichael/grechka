@@ -1,24 +1,21 @@
 import React from 'react';
-import './App.css';
+import styled from "styled-components";
+import Nav from "./Nav";
+import Search from "./Search";
+import ProductCard from "./ProductCard";
+
+const MainApp = styled.main`
+  width: 100%;
+`;
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+            <MainApp>
+                <Nav/>
+                <Search/>
+                <ProductCard product={{title: "Title", price: 212, imgURL: "https://www.gastronom.ru/binfiles/images/20160524/bf5de78e.jpg", url: "https://www.gastronom.ru/binfiles/images/20160524/bf5de78e.jpg", unit:"hrn/kg", weight: 28}}/>
+            </MainApp>
+    );
 }
 
 export default App;
