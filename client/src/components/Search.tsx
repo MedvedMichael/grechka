@@ -3,13 +3,15 @@ import styled from "styled-components";
 import {IoSearchSharp} from "react-icons/all";
 import {useInput} from "../hooks/useInput";
 import {useFilter} from "../context/filter";
-
+const Container = styled.div`
+min-height:75vh;`
 const Section = styled.section`
   max-width: 80rem;
   min-width: 20rem;
   display: flex;
   margin: 0 auto;
   height: 48px;
+
 `;
 
 const Select = styled.select`
@@ -52,7 +54,8 @@ export default function Search () {
     };
 
     return (
-        <Section>
+        <Container>
+        <Section >
             <Select>
                 <option value="grechka" selected>Grechka</option>
             </Select>
@@ -63,5 +66,6 @@ export default function Search () {
                 </Button>
             </Form>
         </Section>
+        </Container>
     );
 }
