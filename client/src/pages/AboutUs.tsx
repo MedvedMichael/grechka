@@ -5,8 +5,7 @@ import ProfileCard from "../components/ProfileCard";
 import Nikita from '../public/Nikita.jpg'
 import Anton from '../public/Anton.jpg'
 import Michael from '../public/Michael.jpg'
-import Footer from "../components/Footer";
-import Nav from "../components/Nav";
+
 export default function AboutUs() {
     return (<AboutUsContainer>
         <ProfilesContainer>
@@ -20,6 +19,7 @@ const AboutUsContainer = styled.div`
     display: flex;
     flex-direction:column;
     width: 100vw;
+    min-height: 90vh;
 `
 const ProfilesContainer = styled.div`
 

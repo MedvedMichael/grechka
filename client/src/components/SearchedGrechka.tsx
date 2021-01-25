@@ -24,10 +24,10 @@ const SearchedGrechka: React.FC = () => {
             }).finally( () => setLoading(false))
     }, [filter]);
     return (
-        <GrechkaBlock>
+        <GrechkaBlock style={{minHeight: "80vh"}}>
             <Loading loading={loading}>
                 {
-                        data?.length && data?.map(product => <ProductCard product={product} key={product.imgURL}/>) || "Nothing to find "
+                        (data?.length && data?.map(product => <ProductCard product={product} key={product.imgURL}/>)) || "Nothing to find "
                 }
             </Loading>
         </GrechkaBlock>

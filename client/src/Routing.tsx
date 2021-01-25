@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 import Main from "./pages/Main";
 import Search from "./pages/Search";
-import Nav from "./components/Nav";
 import Navbar from "./components/navbar/navbar";
 import AboutUs from "./pages/AboutUs";
 import Footer from "./components/Footer";

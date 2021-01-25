@@ -49,7 +49,15 @@ app.get('/api/stores', async (req, res) => {
 app.get('/api/:name', async (req, res) => {
   try {
     const stores = (await getAllStores()).filter(store => store.address.city === 'Kyiv')
-    const products = await Promise.all(stores.map(async store => ({store, products: await getSearchedProductsFromStore(store.id, req.params.name)})))
+    const products = await Promise.all(stores.map(async store => ({
+      store, 
+      products:  (await getSearchedProductsFromStore(store.id, req.params.name))
+        .map(product => ({ 
+          ...product, 
+          price: Math.floor((product.price / 100) * 100) / 100 ,
+          unit: 'grn'
+        }))
+    })))
     res.status(200).send(products)
   }
   catch (error) {

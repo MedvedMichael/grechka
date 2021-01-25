@@ -4,7 +4,7 @@ import ProductCard from "../components/ProductCard";
 import Loading from "../components/Loading";
 import {ProductWithStore} from "../../../interfaces/Product";
 import {getGrechkaWithStores} from "../service/grechkaService";
-import Footer from "../components/Footer";
+
 
 const Main = () => {
     const [allGrechkas, setAllGrechkas] = useState([] as ProductWithStore[])

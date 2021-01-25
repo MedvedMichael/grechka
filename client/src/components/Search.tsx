@@ -3,8 +3,7 @@ import styled from "styled-components";
 import {IoSearchSharp} from "react-icons/all";
 import {useInput} from "../hooks/useInput";
 import {useFilter} from "../context/filter";
-const Container = styled.div`
-min-height:75vh;`
+
 const Section = styled.section`
   max-width: 80rem;
   min-width: 20rem;
@@ -14,14 +13,6 @@ const Section = styled.section`
 
 `;
 
-const Select = styled.select`
-  flex-grow: 30;
-  background-color: #6E9FEC;
-  border: none;
-  color: #fff;
-  padding: 0 2.65625rem 0 .9375rem;
-  font-size: 18px;
-`;
 
 const Input = styled.input`
   padding-left: .625rem;
@@ -56,18 +47,16 @@ export default function Search () {
     };
 
     return (
-        <Container>
         <Section >
-            <Select>
+            {/* <Select>
                 <option value="grechka" selected>Grechka</option>
-            </Select>
+            </Select> */}
             <Form onSubmit={submitForm}>
-                <Input placeholder="... Нзнайти товар" value={value} onChange={handleChange}/>
+                <Input placeholder="Знайти товар" value={value} onChange={handleChange}/>
                 <Button type="submit">
                     <IoSearchSharp/>
                 </Button>
             </Form>
         </Section>
-        </Container>
     );
 }
