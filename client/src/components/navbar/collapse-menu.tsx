@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
 
-import { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { NavbarProps, NavLinkProps } from './navbar';
 import { useHistory, useLocation } from 'react-router-dom';
+import { VscGithubInverted } from 'react-icons/vsc';
 
 
 
@@ -11,14 +12,22 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 const CollapseMenu = ({ navbarState, handleNavbar }: NavbarProps) => {
   const { open } = useSpring<{open: number}>({ open: navbarState ? 0 : 1 });
+  const pages = [{url:'/', title: 'Home'}, {url: '/search', title: 'Search'}, {url: '/about-us', title: 'About us'}]
+  const path = window.location.pathname
+  const [selectedPage, setSelectedPage] = useState(pages.findIndex(item => item.url === path))
 
-  const NavLink = ({ children, href }: NavLinkProps) => {
+  useEffect(() => {
+    setSelectedPage(pages.findIndex(item => item.url === window.location.pathname))
+  }, [path])
+
+  const NavLink = ({ children, href, onClick }: NavLinkProps) => {
     const history = useHistory()
     const location = window.location
     const isCurrent = location.pathname === href
 
     const onLinkClick = () => {
       if (!isCurrent) {
+        onClick(href)
         history.push(href)
       }
     }
@@ -39,9 +48,11 @@ const CollapseMenu = ({ navbarState, handleNavbar }: NavbarProps) => {
       }}
       >
         <NavLinks >
-          <NavLink href="/">Home</NavLink>
+          {/* <NavLink href="/">Home</NavLink>
           <NavLink href="/blog">Blog</NavLink>
-          <NavLink href="/gallery">Gallery</NavLink>
+          <NavLink href="/gallery">Gallery</NavLink> */}
+          {pages.map(page => <NavLink key={page.url} onClick={(href) => setSelectedPage(pages.findIndex(item => item.url === href))} href={page.url}>{page.title}</NavLink>)}
+          <a style={{marginLeft:'auto'}} target="_blank" href="https://github.com/MedvedMichael/grechka"><VscGithubInverted/></a>
         </NavLinks>
       </CollapseWrapper>
     );

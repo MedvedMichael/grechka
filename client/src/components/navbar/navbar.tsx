@@ -3,8 +3,9 @@ import { useSpring, animated, config, AnimatedValue } from "react-spring";
 
 import BurgerMenu from "./burger-menu";
 import CollapseMenu from "./collapse-menu";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
+import { VscGithubInverted } from "react-icons/vsc";
 
 export interface NavbarProps {
   navbarState: boolean,
@@ -14,7 +15,13 @@ export interface NavbarProps {
 
 const Navbar = () => {
   const [navbarState, setNavbarState] = useState(false)
+  const pages = [{url:'/', title: 'Home'}, {url: '/search', title: 'Search'}, {url: '/about-us', title: 'About us'}]
+  const path = window.location.pathname
+  const [selectedPage, setSelectedPage] = useState(pages.findIndex(item => item.url === path))
 
+  useEffect(() => {
+    setSelectedPage(pages.findIndex(item => item.url === window.location.pathname))
+  }, [path])
   const handleNavbar = () => setNavbarState(!navbarState)
 
   const barAnimation = useSpring({
@@ -34,14 +41,13 @@ const Navbar = () => {
       <NavBar style={barAnimation}>
         <FlexContainer>
           <NavbarTitle>
-            {/* <Link to='/'>MPH's website</Link> */}
+            Grechka app
           </NavbarTitle>
           <NavLinks style={linkAnimation}>
-            <Link to="/search"/>
-            <NavLink href="/">Home</NavLink>
-            <NavLink href="/blog">Blog</NavLink>
-            <NavLink href="/gallery">Gallery</NavLink>
+            {pages.map(page => <NavLink key={page.url} onClick={(href) => setSelectedPage(pages.findIndex(item => item.url === href))} href={page.url}>{page.title}</NavLink>)}
+            <a style={{marginLeft:'auto'}} target="_blank" href="https://github.com/MedvedMichael/grechka"><VscGithubInverted/></a>
           </NavLinks>
+          
           <BurgerWrapper>
             <BurgerMenu
               navbarState={navbarState}
@@ -62,18 +68,20 @@ export default Navbar
 
 export interface NavLinkProps {
   children: string,
-  href: string
+  href: string, 
+  onClick: (href: string) => void
 }
 
-const NavLink = ({ children, href }: NavLinkProps) => {
+const NavLink = ({ children, href, onClick }: NavLinkProps) => {
   const history = useHistory()
   const location = window.location
   const isCurrent = location.pathname === href
 
   const onLinkClick = () => {
-    console.log(history)
-    console.log(location.pathname)
+    // console.log(history)
+    // console.log(location.pathname)
     if (!isCurrent) {
+      onClick(href)
       history.push( href )
     }
   }
@@ -84,19 +92,20 @@ const NavLink = ({ children, href }: NavLinkProps) => {
 }
 
 const NavBar = styled(animated.nav)`
-  position: fixed;
+  position: sticky;
   width: 100%;
   top: 0;
   left: 0;
   z-index: 10;
   font-size: 1.4rem;
-  background-color: #000000;
+  background-color:#555555;
   transition: 0.1s;
   color: #ffffff;
   
 `;
 
 const NavbarTitle = styled.h3`
+    text-decoration: none;
     color: #ffffff;
     font-size: 2rem;
     line-height: 1.2;

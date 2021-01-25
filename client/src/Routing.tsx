@@ -7,12 +7,13 @@ import {
 import Main from "./pages/Main";
 import Search from "./pages/Search";
 import Nav from "./components/Nav";
+import Navbar from "./components/navbar/navbar";
 
 export default function Routing () {
     return(
         <Router>
+            <Navbar />
             <Switch>
-                <Nav />
                 <Route path="/" exact component={Main} />
                 <Route path="/search" exact component={Search} />
             </Switch>

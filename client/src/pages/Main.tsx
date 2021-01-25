@@ -19,10 +19,10 @@ const Main = () => {
             setLoading(false)
         })
     }, [])
-    const cheapGrechka = allGrechkas.slice(0, 4), richGrechka = allGrechkas.slice(allGrechkas.length - 6, allGrechkas.length - 1).reverse()
+    const cheapGrechka = allGrechkas.slice(0, 5), richGrechka = allGrechkas.slice(allGrechkas.length - 6, allGrechkas.length - 1).reverse()
     const restCheapGrechkasViews = cheapGrechka.slice(1).map(item => <ProductCard key={item.url} product={item}/>)
     const restRichGrechkasViews = richGrechka.slice(1).map(item => <ProductCard key={item.url} product={item}/>)
-    const restGrechkasView = allGrechkas.slice(5, allGrechkas.length - 7).map(item => <ProductCard key={item.url}
+    const restGrechkasView = allGrechkas.slice(6, allGrechkas.length - 7).map(item => <ProductCard key={item.url}
                                                                                                    product={item}/>)
     return (
         <Loading loading={loading}>
