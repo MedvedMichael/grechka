@@ -14,32 +14,43 @@ const MainApp = styled.main`
 `;
 
 export default function App() {
-  const [grechka, setGrechka] = useState([] as Product[])
+  const [cheapGrechka, setCheapGrechka] = useState([] as Product[])
+  const [richGrechka, setRichGrechka] = useState([] as Product[])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     getGrechkaWithStores().then(data => {
-      const newGrechka = data.map(item => item.products[0])
-      setGrechka(newGrechka.sort((a, b) => a.price - b.price))
+      const newCheapGrechka = data.map(item => item.products[0])
+      setCheapGrechka(newCheapGrechka.sort((a, b) => a.price - b.price))
+      const newRichGrechka = data.map(item => item.products[item.products.length - 1])
+      setRichGrechka(newRichGrechka.sort((a, b) => b.price - a.price))
       setLoading(false)
     })
   }, [])
 
-  const restGrechkasViews = grechka.slice(1).map(item => <ProductCard key={item.url} product={item} />)
+  const restCheapGrechkasViews = cheapGrechka.slice(1).map(item => <ProductCard key={item.url} product={item} />)
+  const restRichGrechkasViews = richGrechka.slice(1).map(item => <ProductCard key={item.url} product={item} />)
   return (
     <MainApp>
       <Nav />
       {loading
         ? <Spinner />
         : <>
-        <CheapestGrechkaTitle>After a long search and sleepless nights, our team finally found the cheapest buckwheat in the stores of our hometown - Kiev</CheapestGrechkaTitle>
-          <CheapestGrechkaBlock>
-            
-            
-            <ProductCard product={grechka[0]} big/>
-          </CheapestGrechkaBlock>
+          <Title>After a long search and sleepless nights, our team finally found the cheapest buckwheat in the stores of our hometown - Kiev</Title>
+          <BigGrechkaBlock>
+            <ProductCard product={cheapGrechka[0]} big />
+          </BigGrechkaBlock>
+          <Title>Other cheap variant specially for you :)</Title>
           <GrechkaBlock>
-            {restGrechkasViews}
+            {restCheapGrechkasViews}
+          </GrechkaBlock>
+          <Title>Also, if you have enough money, you're able to feel rich and buy the most expensive buckwheat that we found!</Title>
+          <BigGrechkaBlock>
+            <ProductCard product={richGrechka[0]} big />
+          </BigGrechkaBlock>
+          <Title>And some less expensive variants for you)))</Title>
+          <GrechkaBlock>
+            {restRichGrechkasViews}
           </GrechkaBlock>
         </>
       }
@@ -47,14 +58,14 @@ export default function App() {
   );
 }
 
-const CheapestGrechkaBlock = styled.div`
+const BigGrechkaBlock = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem;
   margin: 0 auto;
 `
 
-const CheapestGrechkaTitle = styled.h1`
+const Title = styled.h1`
     text-align: center;
     font-size: xx-large;
     padding: 0 3rem;
