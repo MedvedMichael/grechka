@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Product } from '../../interfaces/Product'
+import { ProductWithStore } from '../../../interfaces/Product'
 
 interface ProductCardProps {
-  product: Product,
+  product: ProductWithStore,
   big?: boolean
 }
 
@@ -52,6 +52,7 @@ export default function ProductCard({ product, big }: ProductCardProps) {
       <Img className={big ? 'big' : ''} src={product.imgURL} />
       <h2>{product.title}</h2>
       <p>{product.price} {product.unit || "grn/kg"}</p>
+      <p>Store: {product.store.name}</p>
     </ProductCardView>
   )
 }

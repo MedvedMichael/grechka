@@ -1,1 +1,1 @@
-npm start --prefix ./client & npm start --prefix ./server
+npm start --prefix ./server

@@ -19,9 +19,10 @@ RUN npm install -g typescript
 
 RUN npm install --prefix ./server
 RUN npm install --prefix ./client
+RUN npm run build --prefix ./client
 
 
 
-EXPOSE 3000 3001
+EXPOSE 3001
 # CMD [ "npm", "run --prefix ./server start" ]
 CMD [ "./start.sh" ]

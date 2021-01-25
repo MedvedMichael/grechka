@@ -1,11 +1,11 @@
 import React from 'react';
 import Nav from './Nav';
 import styled from 'styled-components'
-import ProfileCard from "./ProfileCard";
-import Nikita from './public/Nikita.jpg'
-import Anton from './public/Anton.jpg'
-import Michael from './public/Michael.jpg'
-import Footer from "./Footer";
+import ProfileCard from "../components/ProfileCard";
+import Nikita from '../public/Nikita.jpg'
+import Anton from '../public/Anton.jpg'
+import Michael from '../public/Michael.jpg'
+import Footer from "../components/Footer";
 console.log(1)
 export default function AboutUs() {
     return (<AboutUsContainer>

@@ -7,8 +7,6 @@ input, button{
   border: none;
 }
 
-button{
-}
 
 button:focus, input:focus, select:focus{
   outline: none;
