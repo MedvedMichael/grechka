@@ -5,6 +5,7 @@ import ProductCard from "./ProductCard";
 import { getGrechkaWithStores } from './service/grechkaService';
 import { Product } from '../../interfaces/Product';
 import Spinner from './Spinner';
+import Footer from "./Footer";
 
 
 const MainApp = styled.main`
@@ -52,8 +53,10 @@ export default function App() {
           <GrechkaBlock>
             {restRichGrechkasViews}
           </GrechkaBlock>
+            <Footer/>
         </>
       }
+
     </MainApp>
   );
 }
