@@ -3,14 +3,15 @@ import styled from "styled-components";
 export default function Footer(){
     return (
         <FooterContainer>
-            <a href={'github.com/AntonFiveis'}>Anton</a>
-            <a href = {'github.com/MedvedMichael'}>Michael</a>
-            <a href = {'github.com/nikita-nikita-nikita'}>Nikita</a>
+            <a href={'https://github.com/AntonFiveis'}>Anton</a>
+            <a href = {'https://github.com/MedvedMichael'}>Michael</a>
+            <a href = {'https://github.com/nikita-nikita-nikita'}>Nikita</a>
         </FooterContainer>
     )
 }
 const FooterContainer =styled.div`
-background-color: #555555;
+  margin-top: auto;
+  background-color: #555555;
   width: 100%;
   height: 60px;
   padding: 0 20%;

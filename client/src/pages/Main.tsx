@@ -56,7 +56,6 @@ const Main = () => {
             <GrechkaBlock>
                 {growing ? restGrechkasView : restGrechkasView.reverse()}
             </GrechkaBlock>
-            <Footer/>
         </Loading>
     )
 }

@@ -14,7 +14,6 @@ export default function AboutUs() {
             <ProfileCard telegram={'@medved2001'} fullName={'Медведев Михаил'} github={'https://github.com/MedvedMichael'} imgUrl={Michael}/>
             <ProfileCard telegram={'@Ethsfn'} fullName={'Блудов Никита'} github={'https://github.com/nikita-nikita-nikita'} imgUrl={Nikita}/>
         </ProfilesContainer>
-        <Footer/>
     </AboutUsContainer>)
 }
 const AboutUsContainer = styled.div`

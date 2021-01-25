@@ -14,7 +14,7 @@ export default function ProfileCard({imgUrl,fullName, telegram, github}:ProfileC
             <ProfileImg src={imgUrl} alt={'profile image'}/>
             <Text>Full name:{fullName}</Text>
             <Text>Telegram: {telegram}</Text>
-            <Text>GitHub: <a href={github}> {github}</a></Text>
+            <Text>GitHub: <a style={{color: '#000'}} href={github}> {github}</a></Text>
         </ProfileCardContainer>
     )
 }
