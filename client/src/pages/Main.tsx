@@ -75,7 +75,7 @@ const Text = styled.p`
   margin: 1rem;
 `
 
-const GrechkaBlock = styled.div`
+export const GrechkaBlock = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;

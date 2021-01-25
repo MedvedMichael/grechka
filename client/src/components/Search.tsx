@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FormEvent} from "react";
 import styled from "styled-components";
 import {IoSearchSharp} from "react-icons/all";
 import {useInput} from "../hooks/useInput";
@@ -36,6 +36,7 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 const Form = styled.form`
@@ -47,7 +48,8 @@ export default function Search () {
     const {value, handleChange} = useInput();
     const {setFilter} = useFilter();
 
-    const submitForm = () => {
+    const submitForm = (e:FormEvent) => {
+        e.preventDefault();
         setFilter(value)
     };
 
