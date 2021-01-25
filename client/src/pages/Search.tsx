@@ -15,7 +15,7 @@ const Search = () => {
         <FilterProvider>
             <SearchComponent/>
             <Message>Это поиск по всем продуктами, надо ввести минимум 3 буквы для поиска</Message>
-            <SearchedGrechka/>
+            <SearchComponent/>
         </FilterProvider>
     );
 };

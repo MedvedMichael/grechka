@@ -12,6 +12,7 @@ const MainApp = styled.main`
 export default function App() {
   return (
     <MainApp>
+
       <Routing/>
     </MainApp>
   );

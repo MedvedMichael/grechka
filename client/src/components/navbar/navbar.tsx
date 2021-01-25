@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { useSpring, animated, config, AnimatedValue } from "react-spring";
+import { useSpring, animated, config } from "react-spring";
 
 import BurgerMenu from "./burger-menu";
 import CollapseMenu from "./collapse-menu";
-import React, { useContext, useEffect, useState } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {useHistory } from "react-router-dom";
 import { VscGithubInverted } from "react-icons/vsc";
 
 export interface NavbarProps {
@@ -45,7 +45,9 @@ const Navbar = () => {
           </NavbarTitle>
           <NavLinks style={linkAnimation}>
             {pages.map(page => <NavLink key={page.url} onClick={(href) => setSelectedPage(pages.findIndex(item => item.url === href))} href={page.url}>{page.title}</NavLink>)}
-            <a style={{marginLeft:'auto'}} target="_blank" href="https://github.com/MedvedMichael/grechka"><VscGithubInverted/></a>
+            <span style={{ marginLeft: 'auto', textDecoration: "none" }} >
+              <a target="_blank" href="https://github.com/MedvedMichael/grechka"><VscGithubInverted /></a>
+            </span>
           </NavLinks>
           
           <BurgerWrapper>
@@ -78,8 +80,6 @@ const NavLink = ({ children, href, onClick }: NavLinkProps) => {
   const isCurrent = location.pathname === href
 
   const onLinkClick = () => {
-    // console.log(history)
-    // console.log(location.pathname)
     if (!isCurrent) {
       onClick(href)
       history.push( href )
