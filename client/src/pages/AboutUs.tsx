@@ -1,15 +1,14 @@
 import React from 'react';
-import Nav from './Nav';
+
 import styled from 'styled-components'
 import ProfileCard from "../components/ProfileCard";
 import Nikita from '../public/Nikita.jpg'
 import Anton from '../public/Anton.jpg'
 import Michael from '../public/Michael.jpg'
 import Footer from "../components/Footer";
-console.log(1)
+import Nav from "../components/Nav";
 export default function AboutUs() {
     return (<AboutUsContainer>
-        <Nav/>
         <ProfilesContainer>
             <ProfileCard telegram={'@fiveiskii'} fullName={'Фивейский Антон'} github={'https://github.com/AntonFiveis'} imgUrl={Anton}/>
             <ProfileCard telegram={'@medved2001'} fullName={'Медведев Михаил'} github={'https://github.com/MedvedMichael'} imgUrl={Michael}/>
@@ -29,4 +28,5 @@ display:flex;
 flex-direction:row;
 width:100%;
 justify-content:space-around;
+
 `

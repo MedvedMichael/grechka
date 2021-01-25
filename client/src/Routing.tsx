@@ -8,6 +8,7 @@ import Main from "./pages/Main";
 import Search from "./pages/Search";
 import Nav from "./components/Nav";
 import Navbar from "./components/navbar/navbar";
+import AboutUs from "./pages/AboutUs";
 
 export default function Routing () {
     return(
@@ -16,6 +17,7 @@ export default function Routing () {
             <Switch>
                 <Route path="/" exact component={Main} />
                 <Route path="/search" exact component={Search} />
+                <Route path="/about-us" exact component={AboutUs}/>
             </Switch>
         </Router>
     )
