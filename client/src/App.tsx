@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Nav from "./Nav";
 import ProductCard from "./ProductCard";
 import { getGrechkaWithStores } from './service/grechkaService';
-import { Product } from '../../interfaces/Product';
+import { ProductWithStore } from '../../interfaces/Product';
 import Spinner from './Spinner';
 
 
@@ -14,22 +14,24 @@ const MainApp = styled.main`
 `;
 
 export default function App() {
-  const [cheapGrechka, setCheapGrechka] = useState([] as Product[])
-  const [richGrechka, setRichGrechka] = useState([] as Product[])
+  const [allGrechkas, setAllGrechkas] = useState([] as ProductWithStore[])
   const [loading, setLoading] = useState(true)
+  const [growing, setGrowing] = useState(true)
 
   useEffect(() => {
     getGrechkaWithStores().then(data => {
-      const newCheapGrechka = data.map(item => item.products[0])
-      setCheapGrechka(newCheapGrechka.sort((a, b) => a.price - b.price))
-      const newRichGrechka = data.map(item => item.products[item.products.length - 1])
-      setRichGrechka(newRichGrechka.sort((a, b) => b.price - a.price))
+      const grechka = data.reduce((prev, {products, store}) => {
+        return [...prev, ...products.map(item => ({ ...item, store }))]
+      }, [] as ProductWithStore[]).sort((a,b) => a.price - b.price)
+      setAllGrechkas(grechka)
       setLoading(false)
     })
   }, [])
-
+  const cheapGrechka = allGrechkas.slice(0,4),
+    richGrechka = allGrechkas.slice(allGrechkas.length - 6, allGrechkas.length - 1).reverse()
   const restCheapGrechkasViews = cheapGrechka.slice(1).map(item => <ProductCard key={item.url} product={item} />)
   const restRichGrechkasViews = richGrechka.slice(1).map(item => <ProductCard key={item.url} product={item} />)
+  const restGrechkasView = allGrechkas.slice(5, allGrechkas.length - 7).map(item => <ProductCard key={item.url} product={item} />)
   return (
     <MainApp>
       <Nav />
@@ -52,6 +54,20 @@ export default function App() {
           <GrechkaBlock>
             {restRichGrechkasViews}
           </GrechkaBlock>
+          <TitleBlock>
+            <Title>Other variants of buckweat</Title>
+            <Text>Growing</Text>
+            <GrowSwitch>
+              
+              <GrowingInput type="checkbox" checked={growing} onChange={() => setGrowing(!growing)} />
+              <GrowSlider></GrowSlider>
+            </GrowSwitch>
+          </TitleBlock>
+          <GrechkaBlock>
+            
+            {growing ? restGrechkasView : restGrechkasView.reverse( )}
+          </GrechkaBlock>
+          
         </>
       }
     </MainApp>
@@ -70,6 +86,9 @@ const Title = styled.h1`
     font-size: xx-large;
     padding: 0 3rem;
 `
+const Text = styled.p`
+  margin: 1rem;
+`
 
 const GrechkaBlock = styled.div`
   display: flex;
@@ -77,4 +96,59 @@ const GrechkaBlock = styled.div`
   margin: 0 auto;
   justify-content: center;
   align-items: center;
+`
+const GrowingInput = styled.input`
+
+`
+
+const TitleBlock = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
+const GrowSwitch = styled.label`
+
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  & input {display:none;}
+
+  & input:checked + span {
+  background-color: #2196F3;
+}
+  & input:checked + span:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+`
+
+const GrowSlider = styled.span`
+
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+
+  &:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+  }
 `
