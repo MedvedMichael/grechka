@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ProductWithStore } from '../../interfaces/Product'
+import { ProductWithStore } from '../../../interfaces/Product'
 
 interface ProductCardProps {
   product: ProductWithStore,

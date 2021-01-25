@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import {IoSearchSharp} from "react-icons/all";
-import {useInput} from "./hooks/useInput";
-import {useFilter} from "./context/filter";
+import {useInput} from "../hooks/useInput";
+import {useFilter} from "../context/filter";
 
 const Section = styled.section`
   max-width: 80rem;

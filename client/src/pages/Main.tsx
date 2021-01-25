@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
-import ProductCard from "../ProductCard";
-import Loading from "../Loading";
+import ProductCard from "../components/ProductCard";
+import Loading from "../components/Loading";
 import {ProductWithStore} from "../../../interfaces/Product";
 import {getGrechkaWithStores} from "../service/grechkaService";
 

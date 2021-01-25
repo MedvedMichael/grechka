@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
-import Nav from "./Nav";
-import Main from "./pages/Main";
+import Nav from "./components/Nav";
+import Routing from "./Routing";
 
 const MainApp = styled.main`
   width: 100%;
@@ -13,7 +13,7 @@ export default function App() {
   return (
     <MainApp>
       <Nav />
-      <Main/>
+      <Routing/>
     </MainApp>
   );
 }
