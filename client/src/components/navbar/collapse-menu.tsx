@@ -1,14 +1,10 @@
 import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavbarProps, NavLinkProps } from './navbar';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { VscGithubInverted } from 'react-icons/vsc';
-
-
-
-
 
 const CollapseMenu = ({ navbarState, handleNavbar }: NavbarProps) => {
   const { open } = useSpring<{open: number}>({ open: navbarState ? 0 : 1 });
@@ -48,11 +44,10 @@ const CollapseMenu = ({ navbarState, handleNavbar }: NavbarProps) => {
       }}
       >
         <NavLinks >
-          {/* <NavLink href="/">Home</NavLink>
-          <NavLink href="/blog">Blog</NavLink>
-          <NavLink href="/gallery">Gallery</NavLink> */}
           {pages.map(page => <NavLink key={page.url} onClick={(href) => setSelectedPage(pages.findIndex(item => item.url === href))} href={page.url}>{page.title}</NavLink>)}
-          <a style={{marginLeft:'auto'}} target="_blank" href="https://github.com/MedvedMichael/grechka"><VscGithubInverted/></a>
+          <span style={{marginLeft:'2rem'}}>
+          <a  target="_blank" href="https://github.com/MedvedMichael/grechka"><VscGithubInverted/></a>
+          </span>
         </NavLinks>
       </CollapseWrapper>
     );
@@ -63,7 +58,7 @@ const CollapseMenu = ({ navbarState, handleNavbar }: NavbarProps) => {
 export default CollapseMenu;
 
 const CollapseWrapper = styled(animated.div)`
-  background: #000000;
+  background: #555555;
   transition: 0.1s;
   position: fixed;
   z-index:9;
